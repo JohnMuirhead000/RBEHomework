@@ -40,6 +40,20 @@ classdef HW2
             T(3,3) = cos(theta);
         end
         
+        %where is 1, 2 or 3 (x, y or z respectivly). 
+        %val is how much we are translating it.
+        function T = translate(~, where, val)
+            T = zeros(4,4);
+            for i=1:4
+                T(i,i) = 1;                
+            end
+            T(4,where) = val;
+        end
+        
+        function T = tdh(self, theta, d, a, alpha)
+            T = self.trotz(theta) * sefl.translate(3, d) * self.translate(1,a) * self.trotx(alpha);         
+        end
+        
         
         
        
