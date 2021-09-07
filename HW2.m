@@ -54,6 +54,16 @@ classdef HW2
             T = self.trotz(theta) * sefl.translate(3, d) * self.translate(1,a) * self.trotx(alpha);         
         end
         
+        function T = fwkinscara(self, q)
+            %FUNCTIONNN
+            
+        end
+        
+        function T = fwkinrpp(q)
+            
+        end
+        
+        
         
         
        
