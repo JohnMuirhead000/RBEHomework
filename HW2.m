@@ -54,8 +54,17 @@ classdef HW2
             T = self.trotz(theta) * sefl.translate(3, d) * self.translate(1,a) * self.trotx(alpha);         
         end
         
-        function T = fwkinscara(self, q)
-            %FUNCTIONNN
+        function T = fwkinscara(~, q)
+            L1 = .5;
+            L2 = .5;
+            L4 = .5;
+            
+            R1 = tdh(q(1), 0, L1, 0);
+            R2 = tdh(q(2),0, L2, 0); 
+            R3 = tdh(0, -q(3), 0, 0);
+            R4 = tdh(q(4), L4, 0, 0);
+            
+            T = R1 * R2 * R3 * R4;
             
         end
         
