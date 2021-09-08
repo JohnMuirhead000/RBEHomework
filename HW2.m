@@ -7,6 +7,9 @@ classdef HW2
     
     methods
         
+        function out = HW2()
+        end
+        
         function T = trotz(~, theta)
             T = zeros(4,4);
             for i=1:4
@@ -47,35 +50,37 @@ classdef HW2
             for i=1:4
                 T(i,i) = 1;                
             end
-            T(4,where) = val;
+            T(where, 4) = val;
         end
         
         function T = tdh(self, theta, d, a, alpha)
-            T = self.trotz(theta) * sefl.translate(3, d) * self.translate(1,a) * self.trotx(alpha);         
+            T = self.trotz(theta) * self.translate(3, d) * self.translate(1,a) * self.trotx(alpha);         
         end
         
-        function T = fwkinscara(~, q)
+        function T = fwkinscara(self, q)
             L1 = .5;
             L2 = .5;
             L4 = .5;
             
-            R1 = tdh(q(1), 0, L1, 0);
-            R2 = tdh(q(2),0, L2, 0); 
-            R3 = tdh(0, -q(3), 0, 0);
-            R4 = tdh(q(4), L4, 0, 0);
+            R1 = self.tdh(q(1), 0, L1, 0);
+            R2 = self.tdh(q(2),0, L2, 0); 
+            R3 = self.tdh(0, -q(3), 0, 0);
+            R4 = self.tdh(q(4), L4, 0, 0);
             
             T = R1 * R2 * R3 * R4;
             
         end
         
-        function T = fwkinrpp(q)
+        function T = fwkinrpp(self, q)
+            L1 = .5;
             
-        end
-        
-        
-        
-        
-       
+            R1 = self.tdh(q(1), L1, 0, 0);
+            R2 = self.tdh(-90,q(2), 0, -90); 
+            R3 = self.tdh(90, q(3), 0, 0);
+     
+            T = R1 * R2 * R3;
+            
+        end      
     end
 end
 
